@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ── Paleta principal ── */
+  --color-cream:    #FFFCF8;   /* dominante — fondos */
+  --color-ink:      #171717;   /* texto base */
+  --color-gold:     #F0BA60;   /* CTAs primarios, Secundario A */
+  --color-crimson:  #801822;   /* sección cierre, Secundario B */
+  --color-sky:      #9ABDC8;   /* acentos de datos, Acento A */
+  --color-ember:    #EB9D6F;   /* numeración, labels, Acento decorativo */
+  --color-peach:    #FEA176;   /* links secundarios, Acento B */
+
+  /* ── Tipografía ── */
+  --font-serif:  'Cormorant Garamond', Georgia, serif;
+  --font-sans:   'DM Sans', system-ui, sans-serif;
+
+  /* ── Espaciado ── */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  7rem;
+
+  /* ── Secciones ── */
+  --section-padding: clamp(4rem, 8vw, 7rem) 0;
+  --container-max:   1140px;
+  --container-pad:   clamp(1.5rem, 5vw, 3rem);
+
+  /* ── Transiciones ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+
+  /* ── Tipografía fluida ── */
+  --text-hero:      clamp(2.4rem, 7vw, 5.2rem);
+  --text-h2:        clamp(1.8rem, 4vw, 2.8rem);
+  --text-h3:        clamp(1.3rem, 2.5vw, 1.8rem);
+  --text-body:      clamp(0.95rem, 1.5vw, 1.07rem);
+  --text-label:     0.68rem;   /* fijo — labels siempre pequeños */
+  --text-card-h:    clamp(1.3rem, 2vw, 1.55rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: opacity 0.3s; transform: none; }
+  * { animation-duration: 0.01ms !important; }
+}
+
+body {
+  color: var(--color-ink);
+  background: var(--color-cream);
+  font-family: var(--font-sans);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
