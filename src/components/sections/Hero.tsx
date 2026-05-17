@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import Splitting from "splitting";
+
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import HeroParticles from "./HeroParticles";
@@ -14,55 +14,66 @@ export default function Hero() {
 
   useEffect(() => {
     if (!titleRef.current) return;
-    Splitting({ target: titleRef.current, by: "chars" });
-
-    const chars = titleRef.current.querySelectorAll(".char");
     
-    const tl = gsap.timeline();
+    const ctx = gsap.context(() => {});
     
-    tl.fromTo(
-      ".hero-eyebrow",
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      0
-    )
-    .fromTo(
-      chars,
-      { opacity: 0, y: 40, rotateX: -90 },
-      { opacity: 1, y: 0, rotateX: 0, duration: 0.8, stagger: 0.02, ease: "power3.out" },
-      0.3
-    )
-    .fromTo(
-      ".hero-h2",
-      { opacity: 0, y: 20 },
-      { opacity: 0.58, y: 0, duration: 0.7, ease: "power2.out" },
-      0.9
-    )
-    .fromTo(
-      ".hero-cta",
-      { opacity: 0, scale: 0.9 },
-      { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
-      1.1
-    )
-    .fromTo(
-      ".hero-scroll",
-      { opacity: 0 },
-      { opacity: 0.35, duration: 1 },
-      1.4
-    );
+    const initSplitting = async () => {
+      const Splitting = (await import("splitting")).default;
+      Splitting({ target: titleRef.current!, by: "chars" });
 
-    // Parallax background
-    gsap.to(".hero-bg", {
-      yPercent: 30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+      const chars = titleRef.current!.querySelectorAll(".char");
+      
+      ctx.add(() => {
+        const tl = gsap.timeline();
+        
+        tl.fromTo(
+          ".hero-eyebrow",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+          0
+        )
+        .fromTo(
+          chars,
+          { opacity: 0, y: 40, rotateX: -90 },
+          { opacity: 1, y: 0, rotateX: 0, duration: 0.8, stagger: 0.02, ease: "power3.out" },
+          0.3
+        )
+        .fromTo(
+          ".hero-h2",
+          { opacity: 0, y: 20 },
+          { opacity: 0.58, y: 0, duration: 0.7, ease: "power2.out" },
+          0.9
+        )
+        .fromTo(
+          ".hero-cta",
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
+          1.1
+        )
+        .fromTo(
+          ".hero-scroll",
+          { opacity: 0 },
+          { opacity: 0.35, duration: 1 },
+          1.4
+        );
 
+        // Parallax background
+        gsap.to(".hero-bg", {
+          yPercent: 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+    };
+    
+    initSplitting();
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -71,18 +82,15 @@ export default function Hero() {
       <HeroParticles />
       
       <div className="relative z-10 max-w-[var(--container-max)] mx-auto px-[var(--container-pad)] flex flex-col items-center">
-        <p className="hero-eyebrow text-ember uppercase tracking-[0.3em] text-xs mb-6 font-semibold">
-          Instalación Inmersiva
-        </p>
-        <h1 ref={titleRef} className="hero-h1 font-serif text-[var(--text-hero)] leading-[1.1] mb-6 text-ink [perspective:1000px]">
-          Obras Vivas
+        <h1 ref={titleRef} className="hero-h1 font-serif text-[clamp(2.5rem,6vw,72px)] font-light leading-[1.1] mb-6 text-ink [perspective:1000px]">
+          Lo que ves no es todo lo que existe
         </h1>
-        <h2 className="hero-h2 font-sans text-[var(--text-h2)] font-light text-ink max-w-2xl mx-auto mb-12">
-          Una experiencia interactiva donde el arte respira y las historias cobran vida.
+        <h2 className="hero-h2 font-sans text-[18px] font-normal text-ink/60 max-w-2xl mx-auto mb-12">
+          Una experiencia donde las imágenes recuerdan que alguna vez estuvieron vivas
         </h2>
         
         <div className="hero-cta">
-          <Button variant="primary">Explorar Obras</Button>
+          <Button variant="primary" className="rounded-none">Entra / Descubre la experiencia</Button>
         </div>
       </div>
 

@@ -3,22 +3,24 @@ import Hero from "@/components/sections/Hero";
 import Concepto from "@/components/sections/Concepto";
 import Proceso from "@/components/sections/Proceso";
 import Obras from "@/components/sections/Obras";
+import Mapa from "@/components/sections/Mapa";
+import Equipo from "@/components/sections/Equipo";
+import Cierre from "@/components/sections/Cierre";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="min-h-screen bg-cream flex flex-col">
       <Nav />
-      <Hero />
-      <Concepto />
-      <Proceso />
-      <Obras />
-      {/* 
-        Future sections will go here:
+      <div className="flex flex-col gap-16 md:gap-32 pb-16 md:pb-32">
+        <Hero />
+        <Concepto />
+        <Proceso />
+        <Obras />
         <Mapa />
         <Equipo />
-        <Cierre />
-      */}
+      </div>
+      <Cierre />
       <Footer />
     </main>
   );

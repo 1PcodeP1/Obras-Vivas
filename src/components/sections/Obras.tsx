@@ -4,78 +4,87 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionLabel from "../ui/SectionLabel";
 import RevealBlock from "../ui/RevealBlock";
-import ObrasCard from "../ui/ObrasCard";
+import ObrasCard, { Obra } from "../ui/ObrasCard";
 
-const obrasData = [
-  { id: "1", titulo: "Ecos del Puente", lugar: "Puente de Occidente" },
-  { id: "2", titulo: "Sombras del Atrio", lugar: "Plaza Mayor" },
-  { id: "3", titulo: "Murmullos de Agua", lugar: "Fuente de la Chiquita" },
-  { id: "4", titulo: "Trazos de Oro", lugar: "Museo Juan del Corral" },
+const obrasData: Obra[] = [
+  { id: "1", nombre: "Cargueros", descripcion: "Caminan con el peso de lo sagrado sobre los hombros. En la experiencia, traspasan el marco de su pintura y aparecen en otro: mismas personas, otro mundo detrás.", sonidos: "jadeos, murmullos, pasos sobre piedra" },
+  { id: "2", nombre: "Sahumadoras", descripcion: "El humo de su sahumerio no se detiene en el borde del cuadro. Se cuela hacia otras pinturas, arrastrando con él algo que no tiene nombre pero que se reconoce.", sonidos: "marcha espiritual, vaivén rítmico" },
+  { id: "3", nombre: "Hacedores", descripcion: "Están en medio del trabajo cuando te ven. Sonríen. Siguen. Cuando terminan, giran la figura para que la puedas ver mejor.", sonidos: "pinceladas, silencio concentrado" },
+  { id: "4", nombre: "Matronas", descripcion: "Están frente a un altar. Te dan la bienvenida con la misma naturalidad con la que llevan años cuidando lo que nadie más cuida.", sonidos: "canciones de devoción, viento entre hojas, velas que se encienden" },
+  { id: "5", nombre: "Mayordomos", descripcion: "Hombres de presencia. De formalidad que no pesa. Su rol en la experiencia está tomando forma — por ahora, están ahí, observando también.", sonidos: "(en desarrollo)" },
 ];
 
 export default function Obras() {
-  const [selectedObra, setSelectedObra] = useState<typeof obrasData[0] | null>(null);
+  const [selectedObra, setSelectedObra] = useState<Obra | null>(null);
 
   return (
-    <section id="obras" className="py-[var(--section-padding)] bg-cream">
+    <section id="obras" className="py-[var(--section-padding)] bg-crimson/5">
       <div className="max-w-[var(--container-max)] mx-auto px-[var(--container-pad)]">
         <RevealBlock>
-          <SectionLabel text="Las Obras" />
+          <SectionLabel text="Los que habitan la obra" />
         </RevealBlock>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-auto-fit gap-6 lg:gap-8">
+        <RevealBlock delay={100} className="mb-12">
+          <h2 className="font-serif text-[36px] md:text-[40px] text-ink mb-6 leading-tight">Ellos no posan. Esperan.</h2>
+          <p className="font-sans text-[16px] text-ink font-normal leading-relaxed max-w-3xl">
+            Cargueros, sahumadoras, hacedores, matronas y mayordomos: figuras que en otro tiempo sostuvieron rituales, procesiones y altares. Aquí vuelven a hacerlo — esta vez, contigo al frente.
+          </p>
+        </RevealBlock>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {obrasData.map((obra, i) => (
-            <RevealBlock key={obra.id} delay={i * 100}>
-              <ObrasCard obra={obra} onClick={() => setSelectedObra(obra)} />
-            </RevealBlock>
+            <div key={obra.id} className="relative">
+              <RevealBlock delay={i * 100} className="h-full">
+                <ObrasCard obra={obra} onClick={() => setSelectedObra(obra)} />
+              </RevealBlock>
+
+              <AnimatePresence>
+                {selectedObra?.id === obra.id && (
+                  <>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="fixed inset-0 bg-ink/20 backdrop-blur-[2px] z-40"
+                      onClick={() => setSelectedObra(null)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                      transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                      className="absolute top-0 left-0 w-[calc(100%+2rem)] -ml-4 min-h-[calc(100%+2rem)] -mt-4 bg-cream p-8 z-50 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gold/40 flex flex-col justify-center"
+                    >
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setSelectedObra(null); }}
+                        className="absolute top-4 right-4 w-6 h-6 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+                      >
+                        <div className="w-full h-px bg-ink rotate-45 absolute" />
+                        <div className="w-full h-px bg-ink -rotate-45 absolute" />
+                      </button>
+
+                      <p className="font-sans text-[12px] text-sky mb-4">{selectedObra.sonidos}</p>
+                      <h3 className="font-serif text-[28px] text-ink mb-4 leading-tight">{selectedObra.nombre}</h3>
+                      <p className="font-sans text-[15px] text-ink font-normal leading-relaxed mb-6">
+                        {selectedObra.descripcion}
+                      </p>
+                      
+                      <div className="inline-flex items-center gap-3 cursor-pointer group">
+                        <span className="font-sans text-xs uppercase tracking-widest text-ink group-hover:text-gold transition-colors font-semibold">Ver en la experiencia</span>
+                        <div className="w-6 h-6 rounded-full border border-ink flex items-center justify-center group-hover:border-gold transition-colors">
+                          <div className="w-0 h-0 border-t-[3px] border-t-transparent border-l-[5px] border-l-ink group-hover:border-l-gold border-b-[3px] border-b-transparent ml-0.5 transition-colors" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {selectedObra && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-ink/40 backdrop-blur-sm z-50"
-              onClick={() => setSelectedObra(null)}
-            />
-            <motion.div
-              initial={{ y: 60, opacity: 0, scale: 0.95 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 20, opacity: 0, scale: 0.95 }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-cream p-8 md:p-12 z-50 shadow-2xl"
-            >
-              <button 
-                onClick={() => setSelectedObra(null)}
-                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
-              >
-                <div className="w-full h-px bg-ink rotate-45 absolute" />
-                <div className="w-full h-px bg-ink -rotate-45 absolute" />
-              </button>
-
-              <p className="font-sans text-xs uppercase tracking-widest text-ember mb-4">{selectedObra.lugar}</p>
-              <h3 className="font-serif text-3xl md:text-4xl text-ink mb-6">{selectedObra.titulo}</h3>
-              <p className="font-sans text-ink/70 leading-relaxed mb-8">
-                Descripción detallada de la obra, artista, concepto e intención. 
-                Esta información será cargada dinámicamente desde un CMS en el futuro.
-              </p>
-              
-              <div className="inline-flex items-center gap-4 cursor-pointer group">
-                <span className="font-sans text-sm uppercase tracking-widest text-ink group-hover:text-gold transition-colors">Escuchar audioguía</span>
-                <div className="w-8 h-8 rounded-full border border-ink flex items-center justify-center group-hover:border-gold transition-colors">
-                  <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[6px] border-l-ink group-hover:border-l-gold border-b-[4px] border-b-transparent ml-1 transition-colors" />
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

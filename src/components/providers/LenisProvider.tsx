@@ -19,6 +19,8 @@ export default function LenisProvider({
       smoothWheel: true,
     });
 
+    (window as unknown as { lenis: Lenis }).lenis = lenis;
+
     lenisRef.current = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);

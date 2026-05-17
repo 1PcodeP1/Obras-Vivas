@@ -6,10 +6,10 @@ import SectionLabel from "../ui/SectionLabel";
 import RevealBlock from "../ui/RevealBlock";
 
 const pasos = [
-  { numero: "01", titulo: "Investigación", texto: "Inmersión en los archivos históricos y entrevistas con habitantes locales." },
-  { numero: "02", titulo: "Concepción", texto: "Diseño de las intervenciones artísticas respetando la arquitectura patrimonial." },
-  { numero: "03", titulo: "Producción", texto: "Trabajo conjunto con artesanos locales para materializar las instalaciones." },
-  { numero: "04", titulo: "Activación", texto: "Apertura al público y programa de mediación cultural." },
+  { numero: "01", titulo: "El silencio que antecede", texto: "Cinco pinturas navegan lentamente en el espacio. No están quietas, pero tampoco tienen prisa. Un paisaje sonoro distante — rezos, campanas, viento de Santa Fe — sostiene el ambiente." },
+  { numero: "02", titulo: "La obra te reconoce", texto: "Cuando te detienes frente a ella, se ilumina. Las demás se retiran un poco. El murmullo que le pertenece empieza a escucharse con más claridad." },
+  { numero: "03", titulo: "Tú decides qué se mueve", texto: "Con un gesto de la mano puedes navegar entre las obras o invocar a una. Al acercarte del todo, la pintura cobra vida al estilo que Hogwarts siempre prometió: el personaje comienza a existir." },
+  { numero: "04", titulo: "La obra vuelve a esperar", texto: "Cuando te alejas, todo regresa. La obra deja de animarse. El cosmos de pinturas recupera su deriva lenta. El sonido se desvanece hasta que alguien más se detenga." },
 ];
 
 export default function Proceso() {
@@ -32,7 +32,7 @@ export default function Proceso() {
           }
         });
 
-        tl.fromTo(numero, { opacity: 0, x: -20 }, { opacity: 0.35, x: 0, duration: 0.6 })
+        tl.fromTo(numero, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6 })
           .fromTo(contenido, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.4")
           .fromTo(line, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, "-=0.4");
       });
@@ -42,32 +42,40 @@ export default function Proceso() {
   }, []);
 
   return (
-    <section id="proceso" className="py-[var(--section-padding)] bg-cream" ref={containerRef}>
-      <div className="max-w-[var(--container-max)] mx-auto px-[var(--container-pad)]">
+    <section id="proceso" className="pt-[var(--section-padding)] pb-24 bg-cream" ref={containerRef}>
+      <div className="max-w-[var(--container-max)] mx-auto px-[var(--container-pad)] mb-16">
         <RevealBlock>
-          <SectionLabel text="Proceso Creativo" />
+          <SectionLabel text="Así funciona" />
         </RevealBlock>
-        
-        <div className="flex flex-col">
-          {pasos.map((paso, index) => (
-            <div key={index} className="proceso-item group relative flex flex-col md:flex-row md:items-start gap-4 md:gap-12 py-12 md:py-16">
-              {/* Línea animada superior */}
-              <div className="proceso-linea absolute top-0 left-0 w-full h-px bg-ink/20 origin-left" />
+      </div>
+      
+      <div className="flex flex-col">
+        {pasos.map((paso, index) => (
+          <div key={index} className={`proceso-item group relative flex flex-col md:flex-row md:items-start gap-4 md:gap-12 py-16 px-[var(--container-pad)] ${index % 2 !== 0 ? 'bg-gold/15' : 'bg-cream'}`}>
+            <div className="max-w-[var(--container-max)] mx-auto w-full flex flex-col md:flex-row gap-4 md:gap-12 relative">
+              <div className="proceso-linea absolute top-0 left-0 w-full h-px bg-crimson origin-left -mt-16" />
               
-              <div className="proceso-numero font-sans text-ember text-4xl md:text-5xl tracking-tighter font-light opacity-35 md:w-[80px] shrink-0">
+              <div className="proceso-numero font-sans text-ember text-[24px] tracking-tighter font-normal md:w-[80px] shrink-0 pt-1">
                 {paso.numero}
               </div>
               
               <div className="proceso-contenido flex-1 max-w-2xl">
-                <h3 className="font-serif text-2xl md:text-3xl text-ink mb-4">{paso.titulo}</h3>
-                <p className="font-sans text-ink/70 leading-relaxed">{paso.texto}</p>
+                <h3 className="font-serif text-[22px] md:text-[24px] font-medium text-ink mb-4">{paso.titulo}</h3>
+                <p className="font-sans text-[16px] text-ink font-normal leading-relaxed">{paso.texto}</p>
               </div>
             </div>
-          ))}
-          {/* Última línea */}
-          <div className="proceso-item relative">
-            <div className="proceso-linea absolute top-0 left-0 w-full h-px bg-ink/20 origin-left" />
           </div>
+        ))}
+        <div className="proceso-item relative px-[var(--container-pad)]">
+          <div className="max-w-[var(--container-max)] mx-auto w-full relative">
+            <div className="proceso-linea absolute top-0 left-0 w-full h-px bg-crimson origin-left" />
+          </div>
+        </div>
+        
+        <div className="mt-16 text-center">
+          <span className="font-sans text-[12px] uppercase tracking-widest text-ink/60 cursor-pointer hover:text-ink transition-colors border-b border-ink/20 pb-1 hover:border-ink">
+            Ver muestra técnica ↓
+          </span>
         </div>
       </div>
     </section>

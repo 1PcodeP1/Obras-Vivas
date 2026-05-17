@@ -32,13 +32,21 @@ export default function Nav() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8">
           {["Proceso", "Obras", "Mapa", "Equipo"].map((item) => (
-            <Link
+            <button
               key={item}
-              href={`#${item.toLowerCase()}`}
+              onClick={(e) => {
+                e.preventDefault();
+                const target = `#${item.toLowerCase()}`;
+                if ((window as unknown as { lenis: { scrollTo: (t: string) => void } }).lenis) {
+                  (window as unknown as { lenis: { scrollTo: (t: string) => void } }).lenis.scrollTo(target);
+                } else {
+                  document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
               className="text-xs uppercase tracking-widest text-ink hover:text-gold transition-colors"
             >
               {item}
-            </Link>
+            </button>
           ))}
         </nav>
 
@@ -70,13 +78,23 @@ export default function Nav() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 + 0.1 }}
                 >
-                  <Link
-                    href={`#${item.toLowerCase()}`}
-                    onClick={() => setMenuOpen(false)}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMenuOpen(false);
+                      setTimeout(() => {
+                        const target = `#${item.toLowerCase()}`;
+                        if ((window as unknown as { lenis: { scrollTo: (t: string) => void } }).lenis) {
+                          (window as unknown as { lenis: { scrollTo: (t: string) => void } }).lenis.scrollTo(target);
+                        } else {
+                          document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }, 100);
+                    }}
                     className="font-serif text-4xl text-ink hover:text-gold transition-colors"
                   >
                     {item}
-                  </Link>
+                  </button>
                 </motion.div>
               ))}
             </motion.div>

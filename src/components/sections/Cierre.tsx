@@ -39,21 +39,21 @@ export default function Cierre() {
   }, []);
 
   return (
-    <section id="cierre" className="relative py-[clamp(5rem,10vw,9rem)] bg-crimson overflow-hidden" ref={containerRef}>
+    <section id="cierre" className="relative pt-[clamp(4rem,8vw,6rem)] pb-12 bg-crimson overflow-hidden" ref={containerRef}>
       <div className="cierre-particle absolute -top-32 -right-32 w-96 h-96 rounded-full border border-gold/20 border-dashed" />
       <div className="cierre-particle absolute -bottom-48 -left-48 w-[500px] h-[500px] rounded-full border border-gold/10 border-dotted" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-[var(--container-pad)] text-center flex flex-col items-center">
-        <h2 ref={h2Ref} className="font-serif text-[clamp(2rem,4.5vw,3.2rem)] text-cream leading-tight mb-8">
-          ¿Listo para caminar por<br/>los ecos de la historia?
+        <h2 ref={h2Ref} className="font-serif text-[40px] font-light text-cream leading-tight mb-8">
+          Algunas obras solo cobran vida<br className="hidden md:block"/>cuando tú estás ahí
         </h2>
         
-        <p className="cierre-body font-sans text-cream/80 text-lg mb-12 max-w-2xl">
-          Acompáñanos en la próxima activación en vivo. Únete a la lista de correo para recibir coordenadas secretas.
+        <p className="cierre-body font-sans text-cream/80 text-[16px] font-normal mb-12 max-w-2xl">
+          La versión digital te muestra el concepto. La versión real te muestra qué pasa cuando el arte sabe que llegaste.
         </p>
 
-        <div className="cierre-cta">
-          <Button variant="primary">Agendar Visita</Button>
+        <div className="cierre-cta flex flex-col sm:flex-row items-center justify-center gap-8">
+          <Button variant="primary" className="bg-gold text-ink rounded-none hover:bg-gold/90 font-medium">Visitar la experiencia</Button>
         </div>
       </div>
     </section>

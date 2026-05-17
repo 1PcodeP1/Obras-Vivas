@@ -2,17 +2,18 @@
 
 import { motion } from "framer-motion";
 
-interface Obra {
+export interface Obra {
   id: string;
-  titulo: string;
-  lugar: string;
+  nombre: string;
+  descripcion: string;
+  sonidos: string;
 }
 
 export default function ObrasCard({ obra, onClick }: { obra: Obra; onClick: () => void }) {
   return (
     <motion.div
       onClick={onClick}
-      className="obra-card group cursor-pointer bg-ink/5 p-8 border border-transparent transition-colors duration-300 hover:border-gold/30 flex flex-col h-[300px] justify-between relative overflow-hidden"
+      className="obra-card group cursor-pointer bg-cream p-8 border border-ember/30 transition-colors duration-300 hover:border-gold flex flex-col h-full min-h-[300px] justify-between relative overflow-hidden"
       whileHover={{
         y: -8,
         rotateY: 4,
@@ -22,12 +23,13 @@ export default function ObrasCard({ obra, onClick }: { obra: Obra; onClick: () =
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <div className="relative z-10">
-        <p className="font-sans text-xs uppercase tracking-widest text-ember mb-2">{obra.lugar}</p>
-        <h3 className="font-serif text-2xl text-ink leading-tight">{obra.titulo}</h3>
+        <h3 className="font-serif font-bold text-[20px] text-ink leading-tight mb-2">{obra.nombre}</h3>
+        <p className="font-sans text-[15px] font-normal text-ink leading-relaxed mb-6">{obra.descripcion}</p>
+        <p className="font-sans text-[12px] text-sky">{obra.sonidos}</p>
       </div>
       
-      <div className="card-cta opacity-0 group-hover:opacity-100 transition-opacity duration-200 relative z-10 flex items-center gap-2">
-        <span className="font-sans text-xs uppercase tracking-widest text-gold">Ver Detalles</span>
+      <div className="card-cta opacity-0 group-hover:opacity-100 transition-opacity duration-200 relative z-10 flex items-center gap-2 mt-6">
+        <span className="font-sans text-[12px] uppercase tracking-widest text-gold font-semibold">Activar personaje</span>
         <div className="w-4 h-px bg-gold" />
       </div>
 
