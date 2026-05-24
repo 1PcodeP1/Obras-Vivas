@@ -103,9 +103,9 @@ export default function MapaDots({ puntoActivo, onPuntoClick }: MapaDotsProps) {
         className="path-line"
         d={`M ${PUNTOS_MAPA[0].svgX} ${PUNTOS_MAPA[0].svgY} L ${PUNTOS_MAPA[1].svgX} ${PUNTOS_MAPA[1].svgY} L ${PUNTOS_MAPA[2].svgX} ${PUNTOS_MAPA[2].svgY} L ${PUNTOS_MAPA[3].svgX} ${PUNTOS_MAPA[3].svgY} L ${PUNTOS_MAPA[4].svgX} ${PUNTOS_MAPA[4].svgY}`} 
         fill="none" 
-        stroke="var(--color-peach)" 
-        strokeOpacity="0.4" 
-        strokeWidth="0.4"
+        stroke="var(--color-ember)" 
+        strokeOpacity="0.85" 
+        strokeWidth="0.8"
       />
       
       {/* Points */}
@@ -114,20 +114,14 @@ export default function MapaDots({ puntoActivo, onPuntoClick }: MapaDotsProps) {
         return (
           <g key={p.id} className="map-dot group cursor-pointer" transform={`translate(${p.svgX}, ${p.svgY})`} onClick={() => onPuntoClick(p)}>
             <circle className="pulse" r="5" fill={p.color} opacity="0" />
-            <circle className="core" r={isActive ? "3.5" : "2.5"} fill={p.color} opacity="0" style={{ transition: "r 0.3s ease" }} />
+            <circle className="core" r={isActive ? "4.5" : "3.5"} fill={p.color} opacity="0" style={{ transition: "r 0.3s ease" }} />
             
             {isActive && (
-              <circle r="7" fill="none" stroke={p.color} strokeWidth="0.5" opacity="0.4">
-                <animate attributeName="r" values="7;12;7" dur="1.8s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.4;0;0.4" dur="1.8s" repeatCount="indefinite"/>
+              <circle r="8" fill="none" stroke={p.color} strokeWidth="0.8" opacity="0.6">
+                <animate attributeName="r" values="8;14;8" dur="1.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.6;0;0.6" dur="1.8s" repeatCount="indefinite"/>
               </circle>
             )}
-            
-            <g className="transition-opacity duration-300">
-              <text x="6" y="1" fontSize="3" fill={p.color} opacity={isActive ? "1" : "0.8"} fontFamily="var(--font-sans)" fontWeight={isActive ? "bold" : "normal"} style={{ transition: "all 0.3s ease" }}>
-                {p.nombre.split(' ').slice(0, 2).join(' ')}
-              </text>
-            </g>
           </g>
         );
       })}

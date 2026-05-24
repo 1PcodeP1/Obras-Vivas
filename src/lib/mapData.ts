@@ -66,7 +66,7 @@ export const PUNTOS_MAPA: MapPoint[] = [
     personaje: 'Mayordomos',
     descripcion: 'Los mayordomos administraban el orden de este mercado. Su presencia era silenciosa pero definitiva. Siempre observando. Siempre ahí.',
     audio: '/audio/mercado.mp3',
-    color: 'var(--color-crimson)',
+    color: '#4a5d4e',
     lat: 6.55310,
     lng: -75.82440,
     svgX: 50,

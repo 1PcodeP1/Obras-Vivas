@@ -2,12 +2,10 @@ import SectionLabel from "../ui/SectionLabel";
 import RevealBlock from "../ui/RevealBlock";
 
 const team = [
-  { nombre: "Elena Restrepo", rol: "Dirección Artística" },
-  { nombre: "Andrés Silva", rol: "Diseño Sonoro" },
-  { nombre: "Marta Gómez", rol: "Investigación Histórica" },
-  { nombre: "Carlos Ruiz", rol: "Producción Técnica" },
-  { nombre: "Sofía Medina", rol: "Iluminación" },
-  { nombre: "Luis Fernando", rol: "Desarrollo Interactivo" },
+  { nombre: "Jakeline Maria Avila Verbel", rol: "Interactive developer", imagen: "/images/WhatsApp Image 2026-05-23 at 12.14.41.jpeg" },
+  { nombre: "Jose Ignacio Trujillo Cano", rol: "Head of design", imagen: "/images/WhatsApp Image 2026-05-23 at 12.15.21.jpeg" },
+  { nombre: "Sergio Nicolas Fonseca Niño", rol: "Head of development", imagen: "/images/WhatsApp Image 2026-05-23 at 12.15.50.jpeg" },
+  { nombre: "Juan Felipe Gamboa Restrepo", rol: "Researcher and narrative designer", imagen: "/images/WhatsApp Image 2026-05-23 at 22.54.58.jpeg" },
 ];
 
 export default function Equipo() {
@@ -30,11 +28,13 @@ export default function Equipo() {
           <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-cream to-transparent z-10 pointer-events-none" />
           
           <div className="flex w-max animate-marquee gap-6">
-            {[...team, ...team].map((member, i) => (
+            {[...team, ...team, ...team].map((member, i) => (
               <div key={i} className="flex-none w-[240px] md:w-[280px] flex flex-col items-center text-center group cursor-pointer">
-                <div className="w-full aspect-square rounded-full border border-sky/40 bg-ink/5 mb-6 grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden" />
-                <h4 className="font-sans text-[16px] font-medium text-ink">{member.nombre}</h4>
-                <p className="font-sans text-[14px] font-normal text-gold mt-1">{member.rol}</p>
+                <div className="w-48 md:w-56 aspect-square rounded-full border-4 border-cream shadow-xl mb-6 grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden relative bg-ink/5">
+                  <img src={member.imagen} alt={member.nombre} className="w-full h-full object-cover object-top" />
+                </div>
+                <h4 className="font-sans text-[16px] font-medium text-ink px-4">{member.nombre}</h4>
+                <p className="font-sans text-[14px] font-normal text-gold mt-1 px-4">{member.rol}</p>
               </div>
             ))}
           </div>

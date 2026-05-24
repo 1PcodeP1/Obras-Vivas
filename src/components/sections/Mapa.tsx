@@ -59,10 +59,10 @@ export default function Mapa() {
             </RevealBlock>
           </div>
 
-          <div className="order-1 lg:order-2 relative w-full max-w-md mx-auto lg:max-w-none aspect-square bg-[#ece8dd] rounded-full overflow-hidden flex items-center justify-center shadow-[inset_0_0_40px_rgba(0,0,0,0.15)] border-8 border-cream">
-             <div className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-60" style={{ backgroundImage: "url('/images/mapa_santafe.png')" }} />
+          <div className="order-1 lg:order-2 relative w-full bg-[#ece8dd] rounded-2xl overflow-hidden shadow-lg border-8 border-cream">
+             <img src="/images/mapa_santafe.png" alt="Mapa de Santa Fe" className="w-full h-auto block opacity-60 mix-blend-multiply" />
              
-             <div className="relative w-[95%] h-[95%] flex items-center justify-center">
+             <div className="absolute inset-0">
                <MapaDots puntoActivo={puntoActivo} onPuntoClick={(p) => puntoActivo?.id === p.id ? cerrarPunto() : activarPunto(p)} />
              </div>
 

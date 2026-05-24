@@ -7,6 +7,7 @@ export interface Obra {
   nombre: string;
   descripcion: string;
   sonidos: string;
+  imagen?: string;
 }
 
 export default function ObrasCard({ obra, onClick }: { obra: Obra; onClick: () => void }) {
@@ -25,7 +26,6 @@ export default function ObrasCard({ obra, onClick }: { obra: Obra; onClick: () =
       <div className="relative z-10">
         <h3 className="font-serif font-bold text-[20px] text-ink leading-tight mb-2">{obra.nombre}</h3>
         <p className="font-sans text-[15px] font-normal text-ink leading-relaxed mb-6">{obra.descripcion}</p>
-        <p className="font-sans text-[12px] text-sky">{obra.sonidos}</p>
       </div>
       
       <div className="card-cta opacity-0 group-hover:opacity-100 transition-opacity duration-200 relative z-10 flex items-center gap-2 mt-6">

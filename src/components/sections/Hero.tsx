@@ -90,7 +90,20 @@ export default function Hero() {
         </h2>
         
         <div className="hero-cta">
-          <Button variant="primary" className="rounded-none">Entra / Descubre la experiencia</Button>
+          <Button 
+            variant="primary" 
+            className="rounded-none"
+            onClick={() => {
+              const target = "#concepto";
+              if ((window as unknown as { lenis: { scrollTo: (t: string) => void } }).lenis) {
+                (window as unknown as { lenis: { scrollTo: (t: string) => void } }).lenis.scrollTo(target);
+              } else {
+                document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            Entra / Descubre la experiencia
+          </Button>
         </div>
       </div>
 
