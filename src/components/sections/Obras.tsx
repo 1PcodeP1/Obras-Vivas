@@ -11,7 +11,7 @@ const obrasData: Obra[] = [
   { id: "2", nombre: "Sahumadoras", descripcion: "El humo de su sahumerio no se detiene en el borde del cuadro. Se cuela hacia otras pinturas, arrastrando con él algo que no tiene nombre pero que se reconoce.", sonidos: "marcha espiritual, vaivén rítmico", imagen: "/images/Saumadora.jpg" },
   { id: "3", nombre: "Hacedores", descripcion: "Están en medio del trabajo cuando te ven. Sonríen. Siguen. Cuando terminan, giran la figura para que la puedas ver mejor.", sonidos: "pinceladas, silencio concentrado", imagen: "/images/Hacedor.jpeg" },
   { id: "4", nombre: "Matronas", descripcion: "Están frente a un altar. Te dan la bienvenida con la misma naturalidad con la que llevan años cuidando lo que nadie más cuida.", sonidos: "canciones de devoción, viento entre hojas, velas que se encienden", imagen: "/images/Matrona.jpeg" },
-  { id: "5", nombre: "Mayordomos", descripcion: "Hombres de presencia. De formalidad que no pesa. Su rol en la experiencia está tomando forma — por ahora, están ahí, observando también.", sonidos: "(en desarrollo)", imagen: "/images/Mayordomo.jpg" },
+  { id: "5", nombre: "Mayordomos", descripcion: "Hombres de presencia. De formalidad que no pesa. Su rol en la experiencia está tomando forma — por ahora, están ahí, observando también.", sonidos: "", imagen: "/images/Mayordomo.jpg" },
 ];
 
 export default function Obras() {

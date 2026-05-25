@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import SectionLabel from "../ui/SectionLabel";
 import RevealBlock from "../ui/RevealBlock";
+import { motion, AnimatePresence } from "framer-motion";
 
 const pasos = [
   { numero: "01", titulo: "El silencio que antecede", texto: "Cinco pinturas navegan lentamente en el espacio. No están quietas, pero tampoco tienen prisa. Un paisaje sonoro distante — rezos, campanas, viento de Santa Fe — sostiene el ambiente." },
@@ -14,6 +15,7 @@ const pasos = [
 
 export default function Proceso() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -72,12 +74,57 @@ export default function Proceso() {
           </div>
         </div>
         
-        <div className="mt-16 text-center">
-          <span className="font-sans text-[12px] uppercase tracking-widest text-ink/60 cursor-pointer hover:text-ink transition-colors border-b border-ink/20 pb-1 hover:border-ink">
-            Ver muestra técnica ↓
-          </span>
+        <div className="mt-16 text-center relative z-10">
+          <button 
+            onClick={() => setIsVideoOpen(true)}
+            className="font-sans text-[12px] uppercase tracking-widest text-ink/60 hover:text-ink transition-colors border-b border-ink/20 pb-1 hover:border-ink cursor-pointer bg-transparent"
+          >
+            EL DETRÁS DE CÁMARAS
+          </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {isVideoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/90 backdrop-blur-sm p-4 md:p-12"
+          >
+            <div 
+              className="absolute inset-0" 
+              onClick={() => setIsVideoOpen(false)} 
+            />
+            
+            <button 
+              onClick={() => setIsVideoOpen(false)}
+              className="absolute top-6 right-6 md:top-10 md:right-10 text-cream opacity-60 hover:opacity-100 transition-opacity text-4xl font-light z-10"
+              aria-label="Cerrar video"
+            >
+              ×
+            </button>
+            
+            <motion.div 
+              initial={{ scale: 0.95, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 20, opacity: 0 }}
+              transition={{ type: "spring", bounce: 0, duration: 0.5 }}
+              className="relative w-full max-w-5xl aspect-video bg-black shadow-2xl rounded-lg overflow-hidden border border-cream/10 z-10"
+            >
+              <iframe 
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/5_zOZ8jKBzs?si=uLmg5H_KKA75qoRP" 
+                title="YouTube video player" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -48,7 +48,7 @@ export default function Cierre() {
           Algunas obras solo cobran vida<br className="hidden md:block"/>cuando tú estás ahí
         </h2>
         
-        <p className="cierre-body font-sans text-cream/80 text-[16px] font-normal mb-12 max-w-2xl">
+        <p className="cierre-body font-sans text-white text-[16px] font-normal mb-12 max-w-2xl">
           La versión digital te muestra el concepto. La versión real te muestra qué pasa cuando el arte sabe que llegaste.
         </p>
 
